@@ -1,0 +1,21 @@
+.dropdown-menu-md {
+  width: 150px;
+}
+.dropdown-menu {
+  min-width: 150px;
+}
+.align-middle {
+  vertical-align: middle;
+}
+
+img.img-flag {
+  width: 18px;
+  height: 12px;
+  margin-right: 10px;
+}
+
+span.align-middle i  {
+  font-size: 15px;
+}
+
+

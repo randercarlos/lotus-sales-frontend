@@ -1,0 +1,60 @@
+<!-- ========== Left Sidebar Start ========== -->
+<div class="left side-menu">
+  <div class="sidebar-inner slimscrollleft">
+
+    <!--- Divider -->
+    <div id="sidebar-menu">
+      <ul>
+        <li>
+          <a href="#" class="waves-effect active" routerLink="/dashboard">
+            <i class="md"><img src="assets/icons/icon-home.png" title="{{ 'menu.dashboard' | translate }}"
+              class="menu-icon" /></i>
+            <span> {{ 'menu.dashboard' | translate }} </span>
+          </a>
+        </li>
+
+        <li class="has_sub">
+          <a href="#" class="waves-effect">
+            <i class="md"><img src="assets/icons/icon-mant.png" title="{{ 'menu.registrations.itself' | translate }}"
+              class="menu-icon" /></i>
+            <span> {{ 'menu.registrations.itself' | translate }} </span>
+          </a>
+          <ul class="list-unstyled">
+            <li>
+              <a href="#" routerLink="/categories">
+                <img src="assets/icons/categoria.png" title="{{ 'menu.registrations.category' | translate }}" />
+                {{ 'menu.registrations.category' | translate }}
+              </a>
+            </li>
+            <li>
+              <a href="#" routerLink="/products">
+                <img src="assets/icons/produto.png" title=" {{ 'menu.registrations.product' | translate }}" />
+                {{ 'menu.registrations.product' | translate }}
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="has_sub">
+          <a href="#" class="waves-effect">
+              <i class="md"><img src="assets/icons/icon-report.png" title="{{ 'menu.reports.itself' | translate }}"
+                class="menu-icon" /></i>
+              <span> {{ 'menu.reports.itself' | translate }} </span>
+          </a>
+          <ul class="list-unstyled">
+            <li>
+              <a href="#" class="waves-effect">
+                <i class="md"><img src="assets/icons/icon-dollar.png" title="{{ 'menu.reports.sales_category' | translate }}" class="menu-icon" /></i>
+                <span> {{ 'menu.reports.sales_category' | translate }} </span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+<!-- Left Sidebar End -->

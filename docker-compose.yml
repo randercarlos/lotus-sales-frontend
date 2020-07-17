@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  angular:
+    # build: .
+    # container_name: dev-angular
+    # ports:
+    #   - "4300:4200"
+    # volumes:
+    #   - /app/node_modules
+    #   - ./:/app
+    # command: ng serve --host 0.0.0.0 --poll 1 --disableHostCheck
+    container_name: angular
+    restart: unless-stopped
+    build: .
+    volumes:
+      - '.:/app'
+    ports:
+      - "4300:4200"
+  json-server:
+    image: vimagick/json-server
+    container_name: json-server
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/data
+    restart: always
+    command: -H 0.0.0.0 -p 3000 -w db.json
+  # cloud9:
+  #   image: sapk/cloud9
+  #   container_name: cloud9
+  #   volumes:
+  #     - .:/workspace
+  #   ports:
+  #     - "8181:8181"
+  #   command: --auth test:test

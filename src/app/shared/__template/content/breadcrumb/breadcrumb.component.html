@@ -1,0 +1,20 @@
+<!-- Page-Title -->
+<div class="row">
+  <div class="col-12">
+    <div class="page-title-box">
+      <div class="page-title-left">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item" *ngIf="breadcrumbs[0]?.label !== 'menu.dashboard'">
+            <a routerLink="/dashboard">{{ 'menu.dashboard' | translate }}</a>
+          </li>
+          <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs; let last = last"
+            [routerLinkActive]="last ? 'active' : ''">
+            <a href="#" [class.active]="last" [routerLink]="!last ? [ breadcrumb.route ] : []">
+              {{ breadcrumb.label | translate }}
+            </a>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>

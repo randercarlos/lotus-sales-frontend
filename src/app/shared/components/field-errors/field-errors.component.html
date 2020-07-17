@@ -1,0 +1,24 @@
+<span class="error" *ngIf="fieldControl.errors?.required && fieldControl.touched"
+  translate [translateParams]="{value: transValue?.name }">
+  global.required
+</span>
+<span class="error" *ngIf="fieldControl.errors?.minlength"  translate
+  [translateParams]="{value: transValue?.min }">
+  global.min_chars
+</span>
+<span class="error" *ngIf="fieldControl.errors?.maxlength" translate
+  [translateParams]="{value: transValue?.max }">
+  global.max_chars
+</span>
+<!-- <span class="error" *ngIf="fieldControl.errors?.email" translate [translateParams]="{value: transValue}">
+  <span class="error" *ngIf="fieldControl.errors?.unique" translate [translateParams]="{value: transValue}">
+    global.min_chars
+  </span>
+  global.min_chars
+</span>
+<span class="error" *ngIf="fieldControl.errors?.mobile" translate [translateParams]="{value: transValue}">
+  global.min_chars
+</span>
+<span class="error" *ngIf="fieldControl.errors?.confirmPassword" translate [translateParams]="{value: transValue}">
+  global.min_chars
+</span> -->

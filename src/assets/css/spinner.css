@@ -1,0 +1,41 @@
+/* ===================================== SPINNER ===================================== */
+div.loading-page{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+div.loading-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+md-card-content {
+  padding: 8px;
+}
+
+.spinner{
+  height: 120px;
+  width: 120px;
+  border: 15px solid gainsboro;
+  border-top: 15px solid #33b86c;
+  border-radius: 50%;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from{
+      transform: rotate(0deg);
+  }to{
+    transform: rotate(360deg);
+  }
+}
+/* ===================================== SPINNER ===================================== */

@@ -1,0 +1,428 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Baby",
+      "description": "imperdiet nullam orci",
+      "image": "http://dummyimage.com/163x115.png/5fa2dd/ffffff"
+    }, {
+      "id": 2,
+      "name": "Books",
+      "description": null,
+      "image": "http://dummyimage.com/129x193.bmp/cc0000/ffffff"
+    }, {
+      "id": 3,
+      "name": "Jewelery",
+      "description": "bibendum morbi",
+      "image": "http://dummyimage.com/182x217.png/cc0000/ffffff"
+    }, {
+      "id": 4,
+      "name": "Jewelery",
+      "description": "egestas metus aenean fermentum donec",
+      "image": "http://dummyimage.com/117x128.jpg/5fa2dd/ffffff"
+    }, {
+      "id": 5,
+      "name": "Beauty",
+      "description": null,
+      "image": "http://dummyimage.com/207x206.png/dddddd/000000"
+    }, {
+      "id": 6,
+      "name": "Games",
+      "description": "in felis donec semper",
+      "image": "http://dummyimage.com/109x115.jpg/cc0000/ffffff"
+    }, {
+      "id": 7,
+      "name": "Home",
+      "description": null,
+      "image": null
+    }, {
+      "id": 8,
+      "name": "Shoes",
+      "description": null,
+      "image": "http://dummyimage.com/112x130.bmp/dddddd/000000"
+    }, {
+      "id": 9,
+      "name": "Baby",
+      "description": null,
+      "image": "http://dummyimage.com/194x139.png/cc0000/ffffff"
+    }, {
+      "id": 10,
+      "name": "Garden",
+      "description": null,
+      "image": null
+    }, {
+      "id": 11,
+      "name": "Kids",
+      "description": null,
+      "image": "http://dummyimage.com/190x126.bmp/cc0000/ffffff"
+    }, {
+      "id": 12,
+      "name": "Home",
+      "description": null,
+      "image": null
+    }, {
+      "id": 13,
+      "name": "Shoes",
+      "description": "mi integer ac neque duis",
+      "image": "http://dummyimage.com/176x171.png/cc0000/ffffff"
+    }, {
+      "id": 14,
+      "name": "Clothing",
+      "description": "pede lobortis ligula sit amet",
+      "image": null
+    }, {
+      "id": 15,
+      "name": "Electronics",
+      "description": "donec pharetra magna vestibulum aliquet",
+      "image": "http://dummyimage.com/163x124.png/ff4444/ffffff"
+    }, {
+      "id": 16,
+      "name": "Sports",
+      "description": null,
+      "image": "http://dummyimage.com/164x213.png/dddddd/000000"
+    }, {
+      "id": 17,
+      "name": "Sports",
+      "description": null,
+      "image": null
+    }, {
+      "id": 18,
+      "name": "Baby",
+      "description": null,
+      "image": "http://dummyimage.com/235x147.png/5fa2dd/ffffff"
+    }, {
+      "id": 19,
+      "name": "Beauty",
+      "description": null,
+      "image": null
+    }, {
+      "id": 20,
+      "name": "Automotive",
+      "description": null,
+      "image": "http://dummyimage.com/159x149.bmp/cc0000/ffffff"
+    }, {
+      "id": 21,
+      "name": "Toys",
+      "description": null,
+      "image": null
+    }, {
+      "id": 22,
+      "name": "Toys",
+      "description": "tortor duis mattis egestas",
+      "image": "http://dummyimage.com/147x133.bmp/cc0000/ffffff"
+    }, {
+      "id": 23,
+      "name": "Games",
+      "description": null,
+      "image": "http://dummyimage.com/114x153.jpg/5fa2dd/ffffff"
+    }, {
+      "id": 24,
+      "name": "Books",
+      "description": "sed nisl nunc rhoncus",
+      "image": "http://dummyimage.com/130x119.bmp/5fa2dd/ffffff"
+    }, {
+      "id": 25,
+      "name": "Sports",
+      "description": "aliquam erat volutpat in",
+      "image": "http://dummyimage.com/236x162.jpg/5fa2dd/ffffff"
+    }, {
+      "id": 26,
+      "name": "Sports",
+      "description": "gravida sem praesent id",
+      "image": "http://dummyimage.com/181x127.png/ff4444/ffffff"
+    }, {
+      "id": 27,
+      "name": "Baby",
+      "description": null,
+      "image": "http://dummyimage.com/138x100.png/cc0000/ffffff"
+    }, {
+      "id": 28,
+      "name": "Kids",
+      "description": "proin interdum mauris non ligula",
+      "image": "http://dummyimage.com/143x124.png/ff4444/ffffff"
+    }, {
+      "id": 29,
+      "name": "Home",
+      "description": "habitasse platea",
+      "image": "http://dummyimage.com/245x249.jpg/dddddd/000000"
+    }, {
+      "id": 30,
+      "name": "Books",
+      "description": null,
+      "image": "http://dummyimage.com/235x228.jpg/dddddd/000000"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Wine - White, Riesling, Semi - Dry",
+      "category": "Electronics",
+      "costPrice": 449.61,
+      "salePrice": 800.2,
+      "unitsStock": 288,
+      "photo": "https://robohash.org/quibusdamsolutafugiat.jpg?size=50x50&set=set1",
+      "active": true
+    }, {
+      "id": 2,
+      "name": "French Kiss Vanilla",
+      "category": "Automotive",
+      "costPrice": 62.4,
+      "salePrice": 891.94,
+      "unitsStock": 915,
+      "photo": "https://robohash.org/dictalaboriosamquia.bmp?size=50x50&set=set1",
+      "active": true
+    }, {
+      "id": 3,
+      "name": "Bacon Strip Precooked",
+      "category": "Grocery",
+      "costPrice": 480.37,
+      "salePrice": 743.28,
+      "unitsStock": 50,
+      "photo": "https://robohash.org/eumplaceatsapiente.bmp?size=50x50&set=set1",
+      "active": false
+    }, {
+      "id": 4,
+      "name": "Garlic Powder",
+      "category": "Beauty",
+      "costPrice": 38.1,
+      "salePrice": 662.33,
+      "unitsStock": 862,
+      "photo": null,
+      "active": true
+    }, {
+      "id": 5,
+      "name": "Sherbet - Raspberry",
+      "category": "Shoes",
+      "costPrice": 286.62,
+      "salePrice": 732.29,
+      "unitsStock": 154,
+      "photo": "https://robohash.org/optioquominima.jpg?size=50x50&set=set1",
+      "active": true
+    }, {
+      "id": 6,
+      "name": "Bread - Olive",
+      "category": "Movies",
+      "costPrice": 431.57,
+      "salePrice": 991.46,
+      "unitsStock": 74,
+      "photo": "https://robohash.org/quasioditsunt.jpg?size=50x50&set=set1",
+      "active": true
+    }, {
+      "id": 7,
+      "name": "Pepper - Chillies, Crushed",
+      "category": "Home",
+      "costPrice": 361.65,
+      "salePrice": 669.95,
+      "unitsStock": 377,
+      "photo": "https://robohash.org/laborereprehenderitnatus.bmp?size=50x50&set=set1",
+      "active": false
+    }, {
+      "id": 8,
+      "name": "Sobe - Cranberry Grapefruit",
+      "category": "Games",
+      "costPrice": 146.19,
+      "salePrice": 923.37,
+      "unitsStock": 170,
+      "photo": "https://robohash.org/quiarchitectoquo.jpg?size=50x50&set=set1",
+      "active": false
+    }, {
+      "id": 9,
+      "name": "Longos - Chicken Curried",
+      "category": "Beauty",
+      "costPrice": 67.33,
+      "salePrice": 748.22,
+      "unitsStock": 57,
+      "photo": "https://robohash.org/voluptatemvoluptateseos.png?size=50x50&set=set1",
+      "active": false
+    }, {
+      "id": 10,
+      "name": "Onions - White",
+      "category": "Movies",
+      "costPrice": 384.84,
+      "salePrice": 785.64,
+      "unitsStock": 323,
+      "photo": "https://robohash.org/totamexplicaborerum.jpg?size=50x50&set=set1",
+      "active": false
+    }, {
+      "id": 11,
+      "name": "Wine - Ruffino Chianti",
+      "category": "Electronics",
+      "costPrice": 346.8,
+      "salePrice": 895.18,
+      "unitsStock": 675,
+      "photo": "https://robohash.org/estfugiataut.png?size=50x50&set=set1",
+      "active": false
+    }, {
+      "id": 12,
+      "name": "Muffin Mix - Chocolate Chip",
+      "category": "Tools",
+      "costPrice": 436.14,
+      "salePrice": 637.23,
+      "unitsStock": 185,
+      "photo": "https://robohash.org/modisintad.bmp?size=50x50&set=set1",
+      "active": false
+    }, {
+      "id": 13,
+      "name": "Chocolate - Compound Coating",
+      "category": "Movies",
+      "costPrice": 121.06,
+      "salePrice": 827.06,
+      "unitsStock": 551,
+      "photo": "https://robohash.org/eumetnobis.png?size=50x50&set=set1",
+      "active": false
+    }, {
+      "id": 14,
+      "name": "Longos - Lasagna Beef",
+      "category": "Grocery",
+      "costPrice": 21.14,
+      "salePrice": 696.7,
+      "unitsStock": 307,
+      "photo": "https://robohash.org/eostemporibusinventore.jpg?size=50x50&set=set1",
+      "active": true
+    }, {
+      "id": 15,
+      "name": "Garbage Bag - Clear",
+      "category": "Books",
+      "costPrice": 377.8,
+      "salePrice": 687.97,
+      "unitsStock": 759,
+      "photo": "https://robohash.org/sintarem.png?size=50x50&set=set1",
+      "active": true
+    }, {
+      "id": 16,
+      "name": "Broom And Brush Rack Black",
+      "category": "Music",
+      "costPrice": 235.92,
+      "salePrice": 636.91,
+      "unitsStock": 237,
+      "photo": "https://robohash.org/sedvelitsoluta.png?size=50x50&set=set1",
+      "active": true
+    }, {
+      "id": 17,
+      "name": "Onions - Spanish",
+      "category": "Computers",
+      "costPrice": 28.62,
+      "salePrice": 753.96,
+      "unitsStock": 324,
+      "photo": "https://robohash.org/etenimarchitecto.jpg?size=50x50&set=set1",
+      "active": true
+    }, {
+      "id": 18,
+      "name": "Pepper - Chili Powder",
+      "category": "Sports",
+      "costPrice": 419.68,
+      "salePrice": 970.78,
+      "unitsStock": 257,
+      "photo": "https://robohash.org/fugiateaeaque.bmp?size=50x50&set=set1",
+      "active": true
+    }, {
+      "id": 19,
+      "name": "Pastry - Carrot Muffin - Mini",
+      "category": "Tools",
+      "costPrice": 306.25,
+      "salePrice": 837.78,
+      "unitsStock": 670,
+      "photo": "https://robohash.org/aliquamipsummolestias.bmp?size=50x50&set=set1",
+      "active": true
+    }, {
+      "id": 20,
+      "name": "Assorted Desserts",
+      "category": "Baby",
+      "costPrice": 27.33,
+      "salePrice": 811.87,
+      "unitsStock": 996,
+      "photo": "https://robohash.org/dictasapienteassumenda.bmp?size=50x50&set=set1",
+      "active": false
+    }, {
+      "id": 21,
+      "name": "Nestea - Iced Tea",
+      "category": "Grocery",
+      "costPrice": 92.73,
+      "salePrice": 830.84,
+      "unitsStock": 860,
+      "photo": "https://robohash.org/velipsaquaerat.png?size=50x50&set=set1",
+      "active": false
+    }, {
+      "id": 22,
+      "name": "Bacardi Breezer - Tropical",
+      "category": "Computers",
+      "costPrice": 358.03,
+      "salePrice": 825.26,
+      "unitsStock": 123,
+      "photo": null,
+      "active": false
+    }, {
+      "id": 23,
+      "name": "Eggplant - Regular",
+      "category": "Industrial",
+      "costPrice": 147.04,
+      "salePrice": 979.91,
+      "unitsStock": 299,
+      "photo": null,
+      "active": true
+    }, {
+      "id": 24,
+      "name": "Worcestershire Sauce",
+      "category": "Shoes",
+      "costPrice": 285.22,
+      "salePrice": 865.1,
+      "unitsStock": 179,
+      "photo": "https://robohash.org/tenetursuntexercitationem.jpg?size=50x50&set=set1",
+      "active": true
+    }, {
+      "id": 25,
+      "name": "Water - Evian 355 Ml",
+      "category": "Grocery",
+      "costPrice": 341.83,
+      "salePrice": 639.31,
+      "unitsStock": 450,
+      "photo": "https://robohash.org/voluptatemearumexpedita.bmp?size=50x50&set=set1",
+      "active": true
+    }, {
+      "id": 26,
+      "name": "Bok Choy - Baby",
+      "category": "Kids",
+      "costPrice": 66.8,
+      "salePrice": 758.22,
+      "unitsStock": 404,
+      "photo": "https://robohash.org/assumendadoloremconsectetur.bmp?size=50x50&set=set1",
+      "active": false
+    }, {
+      "id": 27,
+      "name": "Wine - George Duboeuf Rose",
+      "category": "Electronics",
+      "costPrice": 230.82,
+      "salePrice": 853.38,
+      "unitsStock": 662,
+      "photo": "https://robohash.org/minimadoloribusipsa.bmp?size=50x50&set=set1",
+      "active": false
+    }, {
+      "id": 28,
+      "name": "Potatoes - Purple, Organic",
+      "category": "Grocery",
+      "costPrice": 255.98,
+      "salePrice": 704.63,
+      "unitsStock": 314,
+      "photo": "https://robohash.org/consequaturavoluptatibus.png?size=50x50&set=set1",
+      "active": true
+    }, {
+      "id": 29,
+      "name": "Wine - Alicanca Vinho Verde",
+      "category": "Jewelery",
+      "costPrice": 341.9,
+      "salePrice": 920.88,
+      "unitsStock": 399,
+      "photo": "https://robohash.org/voluptatemadperspiciatis.bmp?size=50x50&set=set1",
+      "active": false
+    }, {
+      "id": 30,
+      "name": "Flour - Pastry",
+      "category": "Grocery",
+      "costPrice": 91.62,
+      "salePrice": 726.07,
+      "unitsStock": 164,
+      "photo": "https://robohash.org/laudantiumdignissimoset.bmp?size=50x50&set=set1",
+      "active": false
+    }
+  ]
+}

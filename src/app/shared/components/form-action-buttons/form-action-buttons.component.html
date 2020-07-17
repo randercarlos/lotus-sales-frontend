@@ -1,0 +1,28 @@
+<div class="form-group col-md-10">
+  <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10"
+    [disabled]="!this.form.valid" *ngIf="!this.form.disabled">
+    <i class="fa fa-save" ></i>
+    {{ 'global.save' | translate }}
+  </button>
+
+  <button type="button" class="btn btn-default waves-effect waves-light m-r-10" (click)="this.cancel()"
+    *ngIf="!this.form.disabled">
+    <i class="md md-cancel"></i>
+    {{ 'global.cancel' | translate }}
+  </button>
+
+  <a type="reset" class="btn btn-inverse btn-custom waves-effect waves-light" [routerLink]="this.goBackRoute">
+    <i class="fa fa-arrow-circle-left"></i>
+    {{ 'global.back' | translate }}
+  </a>
+</div>
+
+<div class="form-group col-md-2 pull-right">
+  <label class="required"></label><span class="text-info">
+    {{ 'global.required_field' | translate }}
+  </span>
+</div>
+
+
+<p-confirmDialog header="{{ appConfig.confirmHeaderCancel | translate }}" [icon]="appConfig.confirmIcon"
+acceptLabel="{{ appConfig.yesLabel | translate }}" rejectLabel="{{ appConfig.noLabel | translate }}"></p-confirmDialog>

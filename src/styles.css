@@ -1,0 +1,120 @@
+
+.content-page {
+  min-height: 100vh;
+}
+
+.content-page > .content {
+  padding: 20px 5px;
+  padding-top: 0;
+}
+
+.page-title-box {
+    background-color: #fff;
+    margin: 0 -27px 30px;
+    padding: 0 27px;
+    -webkit-box-shadow: 0 1px 1px rgba(50,58,70,.1);
+    box-shadow: 0 1px 1px rgba(50,58,70,.1);
+    height: 60px;
+}
+
+.page-title-box .page-title-right {
+    float: right;
+    margin-top: 15px;
+}
+
+.page-title-box .page-title-left {
+    float: left;
+    margin-top: 15px;
+}
+
+.form-group label.required:after {
+  content: "*";
+  color: red;
+  margin-left: 5px;
+  font: 15px Calibri, Arial, sans-serif;
+}
+
+.form-group label.required + span {
+  margin-left: 5px;
+  /* font-weight: bold; */
+}
+
+.form-group .btn {
+  z-index: unset;
+}
+
+.has-error span.error, .has-error label.control-label {
+  color: #ef5350;
+}
+
+.has-error .form-control:focus {
+  border-color: red;
+  background-color: #FFF0F5;
+}
+
+.has-error input {
+  border-color: #ef5350;
+  background-color: #FFF0F5;
+}
+
+.has-error span.error {
+  display: block;
+  margin-top: 5px;
+  padding-left: 10px;
+}
+div.disabled, div.disabled:hover, input.disabled, input.disabled:hover {
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  box-shadow: none;
+  opacity: .65;
+}
+
+div.disabled:hover, input.disabled:hover {
+  color: transparent
+}
+
+body i.pi {
+  font-size: 0.8em;
+}
+
+.breadcrumb > li + li:before {
+  padding: 0;
+  color: #ccc;
+  content: "/\00a0";
+  padding: 0;
+  padding-right: 1px;
+  padding-left: 8px;
+}
+
+.btn-toolbar {
+  margin-left: 0px;
+}
+
+.notifyjs-metro-base .title {
+  font-size: 16px;
+}
+
+.notifyjs-metro-base .text {
+  font-size: 14px;
+}
+
+div.img-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0,0,0,0.08);
+  background-color: rgba(0,0,0,0.02);
+  height: 150px;
+  padding-top: 13px;
+  padding-bottom: 10px;
+}
+
+div.img-preview img {
+  width: 100px;
+  height: 120px;
+}
+
+.ng-bar-placeholder {
+  height: 4px !important;
+}

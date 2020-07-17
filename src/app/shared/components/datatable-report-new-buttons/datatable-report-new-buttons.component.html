@@ -1,0 +1,18 @@
+<div>
+  <button type="button" class="btn btn-purple m-r-10" (click)="this.dataTable.exportCSV()">
+    <i class="fa fa-file-text-o"></i>
+    CSV
+  </button>
+  <button type="button" class="btn btn-danger m-r-10" (click)="this.exportPDF()">
+    <i class="fa fa-file-pdf-o"></i>
+    PDF
+  </button>
+</div>
+
+
+<div class="pull-right">
+  <a href="#" class="btn btn-primary" [routerLink]="this.create_route">
+    <i class="fa fa-file"></i>
+    {{ this.create_button_key | translate }}
+  </a>
+</div>

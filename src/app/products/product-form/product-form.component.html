@@ -1,0 +1,164 @@
+<div class="row">
+
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+
+        <h3 class="panel-title">
+          <ng-container *ngIf="this.formMode === FORM_MODE.Create">
+            {{ 'products.product_new' | translate }}
+          </ng-container>
+
+          <ng-container *ngIf="this.formMode === FORM_MODE.Edit">
+            {{ 'products.product_edit' | translate }}
+          </ng-container>
+
+          <ng-container *ngIf="this.formMode === FORM_MODE.View">
+            {{ 'products.product_view' | translate }}
+          </ng-container>
+        </h3>
+
+      </div>
+      <div class="panel-body">
+          <form [formGroup]="productForm" (ngSubmit)="save();">
+            <div class="row">
+
+              <div class="form-group col-md-8"
+                [class.has-error]="this.validationService.hasError(this.productForm.get('name'))">
+
+                <label for="name" class="required control-label">{{ 'global.name' | translate }}:</label>
+                <input type="text" class="form-control" id="name" name="name" maxlength="60"
+                  formControlName="name" required />
+
+                <field-errors [fieldControl]="this.productForm.get('name')"
+                  [transValue]="{name: 'Nome', min: '3'}"></field-errors>
+              </div>
+
+              <div class="form-group col-md-4"
+                [class.has-error]="this.validationService.hasError(this.productForm.get('category'))">
+
+                <label for="category" class="required control-label">{{ 'categories.itself' | translate }}:</label>
+                <select id="category" name="category" class="form-control" formControlName="category" style="
+                  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;" required>
+                  <option value="" selected="selected" >Selecione uma categoria...</option>
+                  <option *ngFor="let category of this.categories | async" value="{{ category.id }}">
+                    {{ category.name }}
+                  </option>
+                </select>
+
+                <span class="error" *ngIf="this.productForm.get('category').errors?.required
+                  && this.productForm.get('category').touched"
+                  translate [translateParams]="{value: 'Nome' }">
+                  global.required
+                </span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-md-4"
+                [class.has-error]="this.validationService.hasError(this.productForm.get('costPrice'))">
+
+                <label for="category" class="required control-label">{{ 'global.cost_price' | translate }}:</label>
+                <input type="text" class="form-control" id="costPrice" name="costPrice" maxlength="9"
+                formControlName="costPrice" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', allowNegative: false }" />
+
+                <field-errors [fieldControl]="this.productForm.get('costPrice')"
+                  [transValue]="{name: 'Preço Custo'}"></field-errors>
+              </div>
+
+              <div class="form-group col-md-4"
+                [class.has-error]="this.validationService.hasError(this.productForm.get('salePrice'))">
+
+                <label for="category" class="required control-label">{{ 'global.sale_price' | translate }}:</label>
+                <input type="text" class="form-control" id="salePrice" name="salePrice" maxlength="9"
+                  formControlName="salePrice" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', allowNegative: false }" />
+
+                <field-errors [fieldControl]="this.productForm.get('costPrice')"
+                  [transValue]="{name: 'Preço Venda'}"></field-errors>
+              </div>
+
+              <div class="form-group col-md-4"
+                [class.has-error]="this.validationService.hasError(this.productForm.get('unitsStock'))">
+
+                <label for="category" class="required control-label">{{ 'global.units_stock' | translate }}:</label>
+                <input type="text" class="form-control" id="unitsStock" name="unitsStock"  currencyMask
+                  maxlength="4" formControlName="unitsStock" [options]="{ prefix: '', precision: 0,
+                  allowNegative: false, decimal:'', thousands:'' }" />
+
+                <field-errors [fieldControl]="this.productForm.get('unitsStock')"
+                  [transValue]="{name: 'Estoque'}"></field-errors>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-md-12">
+                <label for="name" style="display: block;">{{ 'global.image' | translate }}:</label>
+
+                <div class="fileUpload btn btn-purple {{ productForm.disabled
+                    ? 'disabled' : 'waves-effect waves-light' }}">
+                  <span><i class="ion-upload m-r-5"></i>{{ 'global.upload' | translate }}</span>
+                  <input type="file" class="upload" accept='image/*' formControlName="photo" name="photo"
+                    (change)="this.uploadService.preview(imageUpload.files)" [class.disabled]="productForm.disabled"
+                     #imageUpload>
+                </div>
+
+                <ng-container *ngIf="this.uploadService.getMessages().length > 0">
+                  <span class="error" *ngFor="let message of this.uploadService.getMessages()">
+                    {{ message }}
+                  </span>
+                </ng-container>
+
+              </div>
+            </div>
+
+            <div class="row" *ngIf="this.uploadService.imgURL || this.product?.photo">
+              <div class="form-group col-md-12">
+
+                <!-- if upload was done, show the image -->
+                <div class="img-preview" id="img-preview" *ngIf="this.uploadService.imgURL">
+                  <img [src]="this.uploadService.imgURL" />
+                  <a href="javascript:;" (click)="this.uploadService.removeUpload()" id="removeUpload">
+                    <i class="fa fa-times"></i>
+                    {{ 'global.remove_upload' | translate }}
+                  </a>
+                </div>
+
+                <!-- if upload is save in DB, show the image without can to remove the image -->
+                <div class="img-preview" id="img-preview" *ngIf="!this.uploadService.imgURL && this.product?.photo
+                  && this.product?.id">
+                  <img src="assets/images/{{ this.product.photo }}" />
+                  <a href="javascript:;" (click)="this.product.photo = null" id="removeUpload"
+                    *ngIf="this.formMode === FORM_MODE.Edit">
+                    <i class="fa fa-times"></i>
+                    {{ 'global.remove_upload' | translate }}
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-md-12">
+                <div class="checkbox checkbox-primary">
+                  <input type="checkbox" id="active" name="active" value="true" formControlName="active"
+                    selected="selected" />
+                  <label for="description">{{ 'global.active' | translate }}</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <form-action-buttons [form]="this.productForm" goBackRoute="/products"
+                [cancel]="cancel.bind(this)"></form-action-buttons>
+            </div>
+          </form>
+
+          FORM VALID: {{ this.productForm.valid }} <br />
+          FORM ERRORS: {{ this.validationService.getAllFormErrors(this.productForm) | json }}
+      </div><!-- panel-body -->
+    </div>
+  </div>
+
+</div>
+
+

@@ -1,0 +1,170 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "northwind-frontend": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/northwind-frontend",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/assets/css/spinner.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/libs/font-awesome/css/font-awesome.min.css",
+              "src/assets/libs/ionicon/css/ionicons.min.css",
+              "src/assets/css/material-design-iconic-font.min.css",
+              "src/assets/css/animate.css",
+              "src/assets/css/waves-effect.css",
+              "src/assets/libs/sweet-alert/sweet-alert.min.css",
+              "src/assets/libs/modal-effect/css/component.css",
+              "src/assets/libs/notifications/notification.css",
+              "src/assets/libs/dropzone/dropzone.css",
+              "src/assets/css/helper.css",
+              "src/assets/css/style.css",
+              "src/styles.css",
+
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/nova-light/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
+            ],
+            "scripts": [
+              "src/assets/js/modernizr.min.js",
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/bootstrap.min.js",
+              "src/assets/js/waves.js",
+              "src/assets/js/wow.min.js",
+              "src/assets/js/jquery.nicescroll.js",
+              "src/assets/js/jquery.scrollTo.min.js",
+              "src/assets/libs/chat/moment-2.2.1.js",
+              "src/assets/libs/jquery-sparkline/jquery.sparkline.min.js",
+              "src/assets/libs/jquery-detectmobile/detect.js",
+              "src/assets/libs/fastclick/fastclick.js",
+              "src/assets/libs/jquery-slimscroll/jquery.slimscroll.js",
+              "src/assets/libs/jquery-blockui/jquery.blockUI.js",
+              "src/assets/libs/sweet-alert/sweet-alert.min.js",
+              "src/assets/libs/sweet-alert/sweet-alert.init.js",
+              "src/assets/libs/modal-effect/js/classie.js",
+              "src/assets/libs/modal-effect/js/modalEffects.js",
+              "src/assets/libs/notifications/notify.min.js",
+              "src/assets/libs/notifications/notify-metro.js",
+              "src/assets/libs/notifications/notifications.js",
+              "src/assets/libs/dropzone/dropzone.min.js",
+              "src/assets/libs/bootstrap-inputmask/bootstrap-inputmask.min.js",
+              "src/assets/js/jquery.app.js",
+              "src/assets/js/app.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "northwind-frontend:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "northwind-frontend:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "northwind-frontend:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "northwind-frontend:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "northwind-frontend:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "northwind-frontend",
+  "cli": {
+    "analytics": false
+  }
+}

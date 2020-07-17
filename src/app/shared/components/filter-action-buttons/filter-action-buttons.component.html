@@ -1,0 +1,10 @@
+<button type="button" class="btn btn-inverse waves-effect waves-light m-r-10" (click)="this.filter()">
+  <i class="fa fa-search"></i>
+  {{ 'global.filter' | translate }}
+</button>
+
+<button type="button" class="btn btn-default waves-effect waves-light"
+  (click)="this.form.reset(); this.dataTable.reset();">
+  <i class="fa fa-eraser"></i>
+  {{ 'global.clean_filter' | translate }}
+</button>

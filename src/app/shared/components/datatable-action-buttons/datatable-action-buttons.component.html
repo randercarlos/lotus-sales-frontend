@@ -1,0 +1,14 @@
+<a class="btn btn-icon waves-effect btn-primary btn-xs m-r-5" [routerLink]="['edit', this.record.id ]"
+  pTooltip="{{ 'global.tooltip_edit' | translate }}" tooltipPosition="top">
+  <i class="fa fa-pencil"></i>
+</a>
+
+<button class="btn btn-icon waves-effect btn-danger btn-xs m-r-5" tooltipPosition="top"
+  pTooltip="{{ 'global.tooltip_remove' | translate }}" (click)="confirm(this.record.name);">
+  <i class="fa fa-remove"></i>
+</button>
+
+<a class="btn btn-icon waves-effect btn-default btn-xs" tooltipPosition="top"
+  pTooltip="{{ 'global.tooltip_view' | translate }}" [routerLink]="['view', this.record.id ]">
+  <i class="fa fa-eye"></i>
+</a>
