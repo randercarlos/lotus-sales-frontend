@@ -1,0 +1,73 @@
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading"><h3 class="panel-title">{{ 'menu.reports.sales_period_report' | translate }}</h3></div>
+    <div class="panel-body">
+
+        <form [formGroup]="this.salesPeriodForm">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="periodFrom">{{ 'menu.reports.period' | translate }}: ({{ 'global.of' | translate }})</label>
+              <input type="date" class="form-control" id="periodFrom" name="periodFrom" maxlength="10"
+                formControlName="periodFrom" />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="periodTo">{{ 'menu.reports.period' | translate }}: ({{ 'global.until' | translate }})</label>
+              <input type="date" class="form-control" id="periodTo" name="periodTo" maxlength="10"
+                formControlName="periodTo" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <button type="button" class="btn btn-info m-r-10" (click)="this.generateReport()">
+                <i class="md md-attach-money"></i>
+                {{ 'menu.reports.generate_report' | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+
+    </div><!-- panel-body -->
+  </div>
+</div>
+
+
+
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{ 'products.product_list' | translate }}</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+
+        <div class="col-md-6 col-sm-6 text-center">
+          <div class="panel panel-border panel-purple widget-s-1">
+            <div class="panel-heading"> </div>
+            <div class="panel-body">
+              <div class="h2 text-purple">{{ revenue | currency:'BRL':'R$ ':'1.2-2' }}</div>
+              <span class="text-purple font-block">{{ 'menu.reports.revenues' | translate }}</span>
+              <div class="text-right">
+                <i class="ion-social-usd fa-2x text-purple"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6 text-center">
+          <div class="panel panel-border panel-info widget-s-1">
+            <div class="panel-heading"> </div>
+            <div class="panel-body">
+              <div class="h2 text-info">{{ profit | currency:'BRL':'R$ ':'1.2-2' }}</div>
+              <span class="text-info font-block">{{ 'menu.reports.profit' | translate }}</span>
+              <div class="text-right">
+                <i class="ion-social-usd fa-2x text-info"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

@@ -12,7 +12,7 @@
             </div>
             <div class="form-group col-md-9">
               <label for="name">{{ 'global.name' | translate }}:</label>
-              <input type="text" class="form-control" id="name" name="name" pKeyFilter="alphanum" maxlength="30"
+              <input type="text" class="form-control" id="name" name="name" pKeyFilter="alphanum" maxlength="60"
                 formControlName="name" />
             </div>
           </div>
@@ -20,7 +20,7 @@
             <div class="form-group col-md-12">
                 <label for="description">{{ 'global.description' | translate }}:</label>
                 <input type="text" class="form-control" id="description" name="description" pKeyFilter="alphanum"
-                  maxlength="60" formControlName="description"  />
+                  maxlength="100" formControlName="description" />
             </div>
           </div>
           <div class="row">
@@ -50,9 +50,12 @@
 
           <div class="btn-toolbar m-b-15">
 
-            <datatable-report-new-buttons [dataTable]="dataTable" [exportPDF]="exportPDF.bind(this)"
-              [create_route]="'/categories/create'" [create_button_key]="'categories.category_new'">
-            </datatable-report-new-buttons>
+            <div class="pull-right">
+              <a href="#" class="btn btn-primary" routerLink="/categories/create">
+                <i class="fa fa-file"></i>
+                {{ 'categories.category_new' | translate }}
+              </a>
+            </div>
 
           </div>
         </div>
@@ -83,17 +86,7 @@
                 <td *ngFor="let col of columns" class="ui-resizable-column ui-selectable-row"
                   [style.text-align]="col.align ? col.align : null">
 
-                  <button type="button" pTooltip="{{ 'global.tooltip_image' | translate }}"  tooltipPosition="top"
-                    class="md-trigger btn btn-icon waves-effect btn-default"
-                    *ngIf="col.field == 'image' && record.image" (click)="showModal(record.name, record.image);">
-                    <i class="fa fa-file-image-o" ></i>
-                  </button>
-
-                  <ng-container *ngIf="col.field == 'image' && !record.image">
-                    -
-                  </ng-container>
-
-                  <ng-container *ngIf="col.field != 'image' && col.field != 'actions'">
+                  <ng-container *ngIf="col.field != 'actions'">
                     {{ record[col.field] }}
                   </ng-container>
 
@@ -123,13 +116,6 @@
     </div>
   </div>
 </div>
-
-
-<p-dialog [dismissableMask]="appConfig.dismissableMask" [draggable]="appConfig.draggable" [resizable]="appConfig.resizable"
-  [modal]="appConfig.modal" [blockScroll]="appConfig.blockScroll" [appendTo]="appConfig.appendTo"
-  [(visible)]="displayImage" #dialogImgCont>
-  <img src="" title="" #dialogImgSrc />
-</p-dialog>
 
 <p-confirmDialog header="{{ appConfig.confirmHeader | translate }}" [icon]="appConfig.confirmIcon"
 acceptLabel="{{ appConfig.yesLabel | translate }}" rejectLabel="{{ appConfig.noLabel | translate }}"></p-confirmDialog>

@@ -20,7 +20,6 @@ import { NotificationType } from 'src/app/core/enums/notification-type.enum';
 })
 export class CategoryFormComponent implements OnInit {
 
-  @ViewChild("imageUpload") imageUpload: ElementRef<any>;
 
   formMode: FORM_MODE;                      // store the form mode from route data
   FORM_MODE: typeof FORM_MODE = FORM_MODE;  // allow to use the enum FORM_MODE in template
@@ -72,7 +71,6 @@ export class CategoryFormComponent implements OnInit {
     this.categoryForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
       description: ['', [Validators.minLength(5), Validators.maxLength(100)]],
-      image: ['']
     });
   }
 
@@ -82,15 +80,13 @@ export class CategoryFormComponent implements OnInit {
       this.category = category;
 
       // create a clone of the loaded product to restore it when the Cancel button is clicked
-      this.originalCategory = { ...category };
-
+      this.originalCategory = category;
       this.populateForm();
     });
   }
 
   private populateForm(): void {
-    console.log(this.category);
-    this.categoryForm.patchValue({ ...this.category });
+    this.categoryForm.patchValue( this.category );
   }
 
   cancel(): void {
@@ -98,7 +94,6 @@ export class CategoryFormComponent implements OnInit {
       accept: () => {
 
         this.categoryForm.reset();
-        this.uploadService.removeUpload(); // remove the image upload preview
         if (this.formMode === FORM_MODE.Edit) {
           this.category = { ...this.originalCategory };
           this.populateForm();
@@ -111,10 +106,15 @@ export class CategoryFormComponent implements OnInit {
 
   save(): void {
     const data = this.categoryForm.value;
-    data.upload = this.imageUpload.nativeElement.files[0];
-    console.log(data);
-    this.router.navigateByUrl('/categories');
-    this.notificationService.notify(this.translateService.instant('global.success_msg'),
-      this.translateService.instant('categories.successfull_save_msg', { value: data.name }), NotificationType.Success);
+    if (this.route.snapshot.paramMap.get('id')) {
+      data.id = +this.route.snapshot.paramMap.get('id');
+    }
+
+    this.categoryService.save(data).subscribe(response => {
+      this.router.navigateByUrl('/categories');
+
+      this.notificationService.notify(this.translateService.instant('global.success_msg'),
+        this.translateService.instant('categories.successfull_save_msg', { value: this.categoryForm.get('name').value }), NotificationType.Success);
+    });
   }
 }

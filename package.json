@@ -24,7 +24,7 @@
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^4.0.0",
     "@sentry/browser": "^5.17.0",
-    "@types/jquery": "^1.10.35",
+    "@types/jquery": "^3.5.0",
     "jquery": "1.11.2",
     "jspdf": "^1.5.3",
     "jspdf-autotable": "^3.5.3",

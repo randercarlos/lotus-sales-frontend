@@ -68,18 +68,17 @@ export class ProductFormComponent implements OnInit {
         this.loadProduct(id_product);
       }
 
-       this.loadCategories();
-      this.categoryService.loadAllOrderedByName().subscribe(categories => console.log(categories));
+      this.loadCategories();
     });
   }
 
   private createForm(): void {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
-      category: ['', [Validators.required]],
-      costPrice: ['0', [Validators.required, Validators.min(0.01), Validators.max(999.99)]],
-      salePrice: ['0', [Validators.required, Validators.min(0.01), Validators.max(999.99)]],
-      unitsStock: ['0', [Validators.required, Validators.max(9999)]],
+      category_id: ['', [Validators.required]],
+      cost_price: ['0', [Validators.required, Validators.min(0.01), Validators.max(999.99)]],
+      sale_price: ['0', [Validators.required, Validators.min(0.01), Validators.max(999.99)]],
+      units_stock: ['0', [Validators.required, Validators.max(9999)]],
       active: [true],
       photo: [''],
     });
@@ -88,13 +87,15 @@ export class ProductFormComponent implements OnInit {
 
   private loadProduct(id: number): void {
     this.productService.loadByID(id).subscribe(product => {
+
+      console.log(product);
       this.product = product;
 
       // create a clone of the loaded product to restore it when the Cancel button is clicked
-      this.originalProduct = { ...product };
+      this.originalProduct = product;
+      this.populateForm();
     });
 
-    this.populateForm();
   }
 
   private loadCategories(): void {
@@ -102,7 +103,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   private populateForm(): void {
-    this.productForm.patchValue({ ...this.product });
+    this.productForm.patchValue( this.product );
   }
 
   cancel(): void {
@@ -122,12 +123,62 @@ export class ProductFormComponent implements OnInit {
   }
 
   save(): void {
-    const data = this.productForm.value;
-    data.upload = this.imageUpload.nativeElement.files[0];
-    console.log(data);
+    const payload = this.buildPayload();
+
+    if (this.formMode === FORM_MODE.Create) {
+      this.productService.createProduct(payload).subscribe(data => {
+        // this.success();
+      });
+    } else if (this.formMode === FORM_MODE.Edit) {
+      this.productService.updateProduct(payload, this.route.snapshot.paramMap.get('id')).subscribe(data => {
+        // this.success();
+      });
+    }
+  }
+
+  private success(): void {
     this.router.navigateByUrl('/products');
     this.notificationService.notify(this.translateService.instant('global.success_msg'),
-      this.translateService.instant('products.successfull_save_msg', { value: data.name }), NotificationType.Success);
+    this.translateService.instant('products.successfull_save_msg', { value: this.productForm.get('name').value }), NotificationType.Success);
+  }
+
+  private buildPayload() {
+
+    const data = this.productForm.value;
+    data.photo = this.imageUpload.nativeElement.files[0];
+
+    if (this.formMode === FORM_MODE.Create) {
+
+      const payload = new FormData();
+
+      payload.append('name', data.name);
+      payload.append('category_id', data.category_id);
+      payload.append('cost_price', data.cost_price);
+      payload.append('sale_price', data.sale_price);
+      payload.append('units_stock', data.units_stock);
+      payload.append('active', data.active);
+      payload.append('photo', data.photo, data.photo.name);
+      payload.append('upload', this.uploadService.imgURL);
+
+      return payload;
+
+    } else if (this.formMode === FORM_MODE.Edit) {
+
+      const payload = new FormData();
+
+      payload.append('id', this.route.snapshot.paramMap.get('id'));
+      payload.append('name', data.name);
+      payload.append('category_id', data.category_id);
+      payload.append('cost_price', data.cost_price);
+      payload.append('sale_price', data.sale_price);
+      payload.append('units_stock', data.units_stock);
+      payload.append('active', data.active);
+      payload.append('photo', data.photo, data.photo.name);
+      payload.append('upload', this.uploadService.imgURL);
+
+      return payload;
+    }
+
   }
 
 }

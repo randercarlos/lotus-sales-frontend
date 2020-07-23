@@ -1,3 +1,6 @@
+import { CategoryService } from './../../categories/category.service';
+import { Category } from './../../categories/category.model';
+import { Observable } from 'rxjs';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from './../../core/services/notification.service';
@@ -9,6 +12,7 @@ import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { ProductService } from '../product.service';
 import * as jsPDF from "jspdf";
 import "jspdf-autotable";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-list',
@@ -23,6 +27,7 @@ export class ProductListComponent implements OnInit {
 
   displayImage: boolean = false;
   products: Product[];
+  categories: Observable<Category[]>;
   tableColumns: TableColumns[];
   totalRecords: number;
   tableLoading: boolean = true;
@@ -30,13 +35,13 @@ export class ProductListComponent implements OnInit {
   productFilterForm = this.fb.group({
     id: [''],
     name: [''],
-    category: [''],
-    costPrice_lower: [''],
-    costPrice_greather: [''],
-    salePrice_lower: [''],
-    salePrice_greather: [''],
-    unitsStock_lower: [''],
-    unitsStock_greather: [''],
+    category_id: [''],
+    'cost_price[lte]': [''],
+    'cost_price[gte]': [''],
+    'sale_price[lte]': [''],
+    'sale_price[gte]': [''],
+    'units_stock[lte]': [''],
+    'units_stock[gte]': [''],
     active: [''],
   });
 
@@ -46,24 +51,27 @@ export class ProductListComponent implements OnInit {
     public notificationService: NotificationService,
     private fb: FormBuilder,
     private translateService: TranslateService,
-    private productService: ProductService
+    private productService: ProductService,
+    private categoryService: CategoryService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
 
-    this.loadProducts();
-
     this.tableColumns = [
       { field: "id", header: "global.id", width: "70px", sort: true, align: "center"},
-      { field: "photo", header: "global.image", width: "90px", sort: false, align: "center" },
+      { field: "photo", header: "global.image", width: "110px", sort: false, align: "center" },
       { field: "name", header: "global.name", sort: true },
       { field: "category", header: "categories.itself", width: "250px", sort: true },
-      { field: "costPrice", header: "global.cost_price", width: "100px", sort: true, align: "center",  },
-      { field: "salePrice", header: "global.sale_price", width: "100px", sort: true, align: "center", },
-      { field: "unitsStock", header: "global.units_stock", width: "80px", sort: true, align: "center" },
+      { field: "cost_price", header: "global.cost_price", width: "100px", sort: true, align: "center",  },
+      { field: "sale_price", header: "global.sale_price", width: "100px", sort: true, align: "center", },
+      { field: "units_stock", header: "global.units_stock", width: "80px", sort: true, align: "center" },
       { field: "active", header: "global.active", width: "80px", sort: false, align: "center" },
       { field: "actions", header: "global.actions", width: "110px", sort: false, align: "center" },
     ];
+
+    this.loadProducts();
+    this.loadCategories();
   }
 
   loadProducts(event?: LazyLoadEvent, filters?: object): void {
@@ -72,11 +80,15 @@ export class ProductListComponent implements OnInit {
     this.productService
       .loadByFilters(event, filters ? filters : this.productFilterForm.value)
       .subscribe(resp => {
-        this.products = resp.body;
-        this.totalRecords = Number(resp.headers.get('x-total-count'));
+        this.products = resp.body['data'];
+        this.totalRecords = resp.body['meta']['total'];
         this.tableLoading = false;
       });
 
+  }
+
+  loadCategories(): void {
+    this.categories = this.categoryService.loadAllOrderedByName();
   }
 
   public filter(): void {
@@ -84,40 +96,28 @@ export class ProductListComponent implements OnInit {
   }
 
   public showModal(title: string, imgSrc: string): void {
+
     this.dialogImgCont.header = title;
     this.dialogImgSrc.nativeElement.src = imgSrc;
     this.dialogImgSrc.nativeElement.title = title;
     this.displayImage = true;
   }
 
-  exportPDF(): void {
-
-    const pdf = new jsPDF({ orientation: this.appConfig.orientation });
-    pdf.setProperties({
-      title: this.translateService.instant('global.report_title', {
-        value: this.translateService.instant('products.itself')
-      })
-    });
-    pdf.autoTable({
-      head: [this.tableColumns.map(data => this.translateService.instant(data.header)).slice(0, 3)],
-      body: this.products
-        .map((data) => [
-          data['id'],
-          data['name'],
-          data['description'],
-        ])
-    });
-    window.open(pdf.output("bloburl"));
-  }
-
-  confirm(name: string): void {
+  confirm(record): void {
     this.confirmationService.confirm({
       message: this.translateService.instant('global.confirm_remove_msg',
         { value: this.translateService.instant('products.the_product').toLowerCase() + ` <b>${name}</b>` }),
       accept: () => {
-        this.notificationService.notify(this.translateService.instant('global.success_msg'),
-          this.translateService.instant('global.successfull_remove_msg',
-          { value: this.translateService.instant('products.the_product') + ` <b>${name}</b>` }))
+
+        this.productService.deleteById(record.id).subscribe(data => {
+
+          this.notificationService.notify(this.translateService.instant('global.success_msg'),
+            this.translateService.instant('global.successfull_remove_msg',
+            { value: this.translateService.instant('products.the_product') + ` <b>${record.name}</b>` }))
+
+            this.loadProducts();
+        });
+
       }
     });
   }

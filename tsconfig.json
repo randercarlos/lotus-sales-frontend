@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    // "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,  // adicionado
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

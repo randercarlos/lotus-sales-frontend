@@ -35,6 +35,14 @@
           </ul>
         </li>
 
+        <li>
+          <a href="#" class="waves-effect" routerLink="/orders">
+            <i class="md"><img src="assets/icons/icon_pedido.png" title="{{ 'menu.orders.itself' | translate }}"
+              class="menu-icon" /></i>
+            <span> {{ 'menu.orders.itself' | translate }} </span>
+          </a>
+        </li>
+
         <li class="has_sub">
           <a href="#" class="waves-effect">
               <i class="md"><img src="assets/icons/icon-report.png" title="{{ 'menu.reports.itself' | translate }}"
@@ -43,9 +51,15 @@
           </a>
           <ul class="list-unstyled">
             <li>
-              <a href="#" class="waves-effect">
-                <i class="md"><img src="assets/icons/icon-dollar.png" title="{{ 'menu.reports.sales_category' | translate }}" class="menu-icon" /></i>
-                <span> {{ 'menu.reports.sales_category' | translate }} </span>
+              <a href="#" class="waves-effect" routerLink="/sales_period">
+                <i class="md"><img src="assets/icons/icon-dollar.png" title="{{ 'menu.reports.sales_period' | translate }}" class="menu-icon" /></i>
+                <span> {{ 'menu.reports.sales_period' | translate }} </span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="waves-effect" routerLink="/top_products">
+                <i class="md"><img src="assets/icons/icon-itens.png" title="{{ 'menu.reports.top_products' | translate }}" class="menu-icon" /></i>
+                <span> {{ 'menu.reports.top_products' | translate }} </span>
               </a>
             </li>
           </ul>

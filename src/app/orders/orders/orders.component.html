@@ -1,0 +1,209 @@
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading"><h3 class="panel-title">{{ 'menu.orders.order_details' | translate }}</h3></div>
+    <div class="panel-body">
+
+        <form [formGroup]="this.orderDetailForm">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="product">{{ 'products.it' | translate }}:</label>
+              <!-- <input type="text" class="form-control" id="product" name="product" pKeyFilter="alphanum" maxlength="30"
+                formControlName="product" /> -->
+              <select id="product" name="product" class="form-control" formControlName="product" style="
+                font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;" required
+                (change)="onChange();">
+                <option value="">Selecione um produto...</option>
+                <option *ngFor="let product of this.products | async" [ngValue]="product">
+                  {{ product.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-2">
+              <label for="qtd" class="required control-label">{{ 'menu.orders.quantity' | translate }}:</label>
+              <input type="text" class="form-control" id="qtd" name="qtd"  currencyMask maxlength="4"
+                formControlName="qtd" [options]="{ prefix: '', precision: 0, allowNegative: false, decimal:'', thousands:'' }" />
+            </div>
+            <div class="form-group col-md-2">
+              <label for="unit_price">{{ 'global.unit_price' | translate }}:</label>
+              <span class="form-control">{{ this.selectedProduct?.sale_price | currency:'BRL':'R$ ':'1.2-2' }}</span>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="units_stock">{{ 'global.units_stock' | translate }}:</label>
+              <span class="form-control">{{ this.selectedProduct?.units_stock }}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+
+              <!-- <filter-action-buttons [form]="this.orderForm" [dataTable]="this.dataTable"
+                [filter]="filter.bind(this)"></filter-action-buttons> -->
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <button type="button" class="btn btn-info waves-effect waves-light w-md m-b-5 m-r-10" (click)="addProduct()"
+                [class]="this.selectedProduct && this.orderDetailForm.get('qtd').value > 0 ? '': 'disabled'"
+                [disabled]="this.selectedProduct && this.orderDetailForm.get('qtd').value > 0 ? false: true">
+                <i class="fa fa-plus-circle"></i>
+                Adicionar Produto
+              </button>
+              <button type="button" class="btn btn-danger waves-effect waves-light w-md m-b-5"
+                title="{{ 'menu.orders.title_remove' | translate }}"
+                [class]="!this.selectedDetail ? 'disabled': ''" (click)="removeSelectedDetail()"
+                [disabled]="!this.selectedDetail ? true: false" >
+                <i class="fa fa-trash-o"></i>
+                Remover Produto
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <p-table [value]="this.orderDetails" selectionMode="single" datakey="id" [(selection)]="selectedDetail">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th class="text-center" style="width: 80px">{{ 'global.id' | translate }}</th>
+                    <th>{{ 'products.it' | translate }}</th>
+                    <th class="text-center" style="width: 120px">{{ 'global.unit_price' | translate }}</th>
+                    <th class="text-center" style="width: 80px">{{ 'menu.orders.quantity' | translate }}</th>
+                    <th class="text-center" style="width: 120px">{{ 'menu.orders.subtotal' | translate }}</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item let-rowData>
+                  <tr [pSelectableRow]="rowData">
+                    <td class="text-center">{{ item.id }}</td>
+                    <td>{{ item.product.name }}</td>
+                    <td class="text-center"> {{ item.unit_price | currency:'BRL':'R$ ':'1.2-2' }}</td>
+                    <td class="text-center">{{ item.qtd }}</td>
+                    <td class="text-center">{{ item.unit_price * item.qtd | currency:'BRL':'R$ ':'1.2-2'}}</td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                  <tr>
+                    <td colspan="3"></td>
+                    <td class="text-center">Total</td>
+                    <td class="text-center"> {{ getTotalOrderDetails() | currency:'BRL':'R$ ':'1.2-2' }} </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage" let-columns>
+                  <tr>
+                    <td colspan="5" class="text-center">
+                      {{ 'global.empty_table_message' | translate }}
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <button type="button" class="btn btn-success waves-effect waves-light m-r-10" (click)="makeSale()"
+                [class]="this.orderDetails.length == 0 ? 'disabled': ''"
+                [disabled]="this.orderDetails.length == 0 ? true: false">
+                <i class="fa fa-plus-circle"></i>
+                Realizar Venda
+              </button>
+              <button type="button" class="btn btn-default waves-effect waves-light w-md" (click)="cancel()">
+                <i class="fa fa-eraser"></i>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </form>
+
+    </div><!-- panel-body -->
+  </div>
+</div>
+
+
+
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{ 'menu.orders.order_sales_concluded' | translate }}</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+          <div class="btn-toolbar m-b-15">
+
+            <!-- <datatable-report-new-buttons [dataTable]="dataTable" [exportPDF]="exportPDF.bind(this)"
+              [create_route]="'/products/create'" [create_button_key]="'products.product_new'">
+            </datatable-report-new-buttons> -->
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+          <p-table #dataTable [value]="this.orders" [columns]="tableColumns" [paginator]="appConfig.paginator"
+            [rows]="appConfig.rows" [showCurrentPageReport]="appConfig.showCurrentPageReport"
+            [resizableColumns]="appConfig.resizableColumns" [responsive]="appConfig.responsive"
+            [rowHover]="appConfig.rowHover" currentPageReportTemplate="{{ appConfig.currentPageReportTemplate | translate}}"
+            [rowsPerPageOptions]="appConfig.rowsPerPageOptions" [totalRecords]="this.totalRecords"
+            [scrollable]="appConfig.scrollable" [loading]="this.tableLoading" [lazy]="appConfig.lazy"
+            (onLazyLoad)="loadOrders($event)" >
+
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.sort ? col.field : null"  pResizableColumn
+                  [style.width]="col?.width" [style.text-align]="col.align ? col.align : null">
+                  {{ col.header | translate }}
+                  <p-sortIcon [field]="col.sort ? col.field : null" *ngIf="col.sort" ></p-sortIcon>
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-record let-columns="columns">
+              <tr>
+                <td *ngFor="let col of columns" class="ui-resizable-column ui-selectable-row" [style.width]="col?.width"
+                  [style.text-align]="col.align ? col.align : null">
+
+                  <ng-container *ngIf="['order_date', 'status', 'summary'].includes(col.field) === false">
+                    {{ record[col.field] }}
+                  </ng-container>
+
+                  <ng-container *ngIf="col.field === 'summary'">
+                    {{ makeSummaryFromOrder(record.id) }}
+                  </ng-container>
+
+                  <ng-container *ngIf="col.field === 'order_date'">
+                    {{ record[col.field] | date: 'dd/MM/yyyy HH:mm:ss' }}
+                  </ng-container>
+
+                  <ng-container *ngIf="col.field === 'status'">
+                    <span class="label label-info">
+                      {{ 'menu.orders.concluded' | translate }}
+                    </span>
+                  </ng-container>
+
+                </td>
+              </tr>
+            </ng-template>
+
+
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                <td [attr.colspan]="columns.length">
+                  {{ appConfig.emptymessage | translate }}
+                </td>
+              </tr>
+            </ng-template>
+
+          </p-table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<p-confirmDialog header="{{ appConfig.confirmHeader | translate }}" [icon]="appConfig.confirmIcon"
+  acceptLabel="{{ appConfig.yesLabel | translate }}" rejectLabel="{{ appConfig.noLabel | translate }}"></p-confirmDialog>
+
+<!-- <p-blockUI [blocked]="this.tableLoading" [target]="dataTable"></p-blockUI> -->

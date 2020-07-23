@@ -18,47 +18,54 @@
           </div>
           <div class="row">
             <div class="form-group col-md-6">
-              <label for="category">{{ 'categories.itself' | translate }}:</label>
-              <input type="text" class="form-control" id="category" name="category" pKeyFilter="alphanum"
-                maxlength="60" formControlName="category"  />
+              <label for="category_id">{{ 'categories.itself' | translate }}:</label>
+              <select id="category_id" name="category_id" class="form-control" formControlName="category_id" style="
+                font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;" required>
+                <option value="">Selecione uma categoria...</option>
+                <option *ngFor="let category of this.categories | async" [ngValue]="category.id">
+                  {{ category.name }}
+                </option>
+              </select>
+              <!-- <input type="text" class="form-control" id="category" name="category" pKeyFilter="alphanum"
+                maxlength="60" formControlName="category"  /> -->
             </div>
             <div class="form-group col-md-3">
-              <label for="unitsStock_lower">{{ 'global.units_stock' | translate }} ({{ 'global.lower_equal_than' | translate }}):</label>
-              <input type="text" class="form-control" id="unitsStock_lower" name="unitsStock_lower"
-                pKeyFilter="alphanum" maxlength="60" formControlName="unitsStock_lower"  />
+              <label for="units_stock[gte]">{{ 'global.units_stock' | translate }} ({{ 'global.of' | translate }}):</label>
+              <input type="text" class="form-control" id="units_stock[gte]" name="units_stock[gte]"
+                pKeyFilter="int" maxlength="3" formControlName="units_stock[gte]"  />
             </div>
             <div class="form-group col-md-3">
-              <label for="unitsStock_greather">{{ 'global.units_stock' | translate }} ({{ 'global.greather_equal_than' | translate }}):</label>
-              <input type="text" class="form-control" id="unitsStock_greather" name="unitsStock_greather"
-                pKeyFilter="alphanum" maxlength="60" formControlName="unitsStock_greather"  />
+              <label for="units_stock[lte]">{{ 'global.units_stock' | translate }} ({{ 'global.until' | translate }}):</label>
+              <input type="text" class="form-control" id="units_stock[lte]" name="units_stock[lte]"
+                pKeyFilter="int" maxlength="3" formControlName="units_stock[lte]"  />
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-3">
-              <label for="costPrice_lower">{{ 'global.cost_price' | translate }} ({{ 'global.lower_equal_than' | translate }}):</label>
-              <input type="text" class="form-control" id="costPrice_lower" name="costPrice_lower" pKeyFilter="alphanum"
-                maxlength="60" formControlName="costPrice_lower"  />
+              <label for="cost_price[gte]">{{ 'global.cost_price' | translate }} ({{ 'global.of' | translate }}):</label>
+              <input type="text" class="form-control" id="cost_price[gte]" name="cost_price[gte]" pKeyFilter="num"
+                maxlength="5" formControlName="cost_price[gte]"  />
             </div>
             <div class="form-group col-md-3">
-              <label for="costPrice_greather">{{ 'global.cost_price' | translate }} ({{ 'global.greather_equal_than' | translate }}):</label>
-              <input type="text" class="form-control" id="costPrice_greather" name="costPrice_greather" pKeyFilter="alphanum"
-                maxlength="60" formControlName="costPrice_greather"  />
+              <label for="cost_price[lte]">{{ 'global.cost_price' | translate }} ({{ 'global.until' | translate }}):</label>
+              <input type="text" class="form-control" id="cost_price[lte]" name="cost_price[lte]" pKeyFilter="num"
+                maxlength="5" formControlName="cost_price[lte]"  />
             </div>
             <div class="form-group col-md-3">
-              <label for="salePrice_lower">{{ 'global.sale_price' | translate }} ({{ 'global.lower_equal_than' | translate }}):</label>
-              <input type="text" class="form-control" id="salePrice_lower" name="salePrice_lower" pKeyFilter="alphanum"
-                maxlength="60" formControlName="salePrice_lower"  />
+              <label for="sale_price[gte]">{{ 'global.sale_price' | translate }} ({{ 'global.of' | translate }}):</label>
+              <input type="text" class="form-control" id="sale_price[gte]" name="sale_price[gte]" pKeyFilter="num"
+                maxlength="5" formControlName="sale_price[gte]"  />
             </div>
             <div class="form-group col-md-3">
-              <label for="salePrice_greather">{{ 'global.sale_price' | translate }} ({{ 'global.greather_equal_than' | translate }}):</label>
-              <input type="text" class="form-control" id="salePrice_greather" name="salePrice_greather" pKeyFilter="alphanum"
-                maxlength="60" formControlName="salePrice_greather"  />
+              <label for="sale_price[lte]">{{ 'global.sale_price' | translate }} ({{ 'global.until' | translate }}):</label>
+              <input type="text" class="form-control" id="sale_price[lte]" name="sale_price[lte]" pKeyFilter="num"
+                maxlength="5" formControlName="sale_price[lte]"  />
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-12">
               <div class="checkbox checkbox-primary">
-                <input type="checkbox" id="only_active" name="only_active" value="true" />
+                <input type="checkbox" id="only_active" name="only_active" value="true" formControlName="active" />
                 <label for="description">{{ 'global.only_active' | translate }} ?</label>
               </div>
             </div>
@@ -90,9 +97,12 @@
 
           <div class="btn-toolbar m-b-15">
 
-            <datatable-report-new-buttons [dataTable]="dataTable" [exportPDF]="exportPDF.bind(this)"
-              [create_route]="'/products/create'" [create_button_key]="'products.product_new'">
-            </datatable-report-new-buttons>
+            <div class="pull-right">
+              <a href="#" class="btn btn-primary" routerLink="/products/create">
+                <i class="fa fa-file"></i>
+                {{ 'products.product_new' | translate }}
+              </a>
+            </div>
 
           </div>
         </div>
@@ -124,22 +134,24 @@
                 <td *ngFor="let col of columns" class="ui-resizable-column ui-selectable-row" [style.width]="col?.width"
                   [style.text-align]="col.align ? col.align : null">
 
-                  <button type="button" pTooltip="{{ 'global.tooltip_image' | translate }}"  tooltipPosition="top"
-                    class="md-trigger btn btn-icon waves-effect btn-default"
-                    *ngIf="col.field == 'photo' && record.photo" (click)="showModal(record.name, record.photo);">
-                    <i class="fa fa-file-image-o" ></i>
-                  </button>
-
                   <ng-container *ngIf="col.field == 'photo' && !record.photo">
-                    -
+                    <img src="assets/images/default_img.png" title="Default Image" />
                   </ng-container>
 
-                  <ng-container *ngIf="['photo', 'actions', 'active', 'costPrice', 'salePrice'].includes(col.field) === false">
+                  <ng-container *ngIf="col.field == 'photo' && record.photo">
+                    <img [src]="record[col.field]" alt="{{record.name}}" title="{{record.name}}" style="width: 80px; height: 80px"/>
+                  </ng-container>
+
+                  <ng-container *ngIf="['photo', 'actions', 'active', 'cost_price', 'sale_price', 'category'].includes(col.field) === false">
                     {{ record[col.field] }}
                   </ng-container>
 
-                  <ng-container *ngIf="['costPrice', 'salePrice'].includes(col.field)">
+                  <ng-container *ngIf="['cost_price', 'sale_price'].includes(col.field)">
                     {{ record[col.field] | currency:'BRL':'R$ ':'1.2-2' }}
+                  </ng-container>
+
+                  <ng-container *ngIf="col.field == 'category'">
+                    {{ record[col.field]?.name }}
                   </ng-container>
 
                   <ng-container *ngIf="col.field == 'active'">
@@ -159,7 +171,7 @@
 
             <ng-template pTemplate="emptymessage" let-columns>
               <tr>
-                <td [attr.colspan]="columns.length">
+                <td [attr.colspan]="columns.length" class="text-center">
                   {{ appConfig.emptymessage | translate }}
                 </td>
               </tr>
@@ -176,7 +188,7 @@
 
 <p-dialog [dismissableMask]="appConfig.dismissableMask" [draggable]="appConfig.draggable" [resizable]="appConfig.resizable"
   [modal]="appConfig.modal" [blockScroll]="appConfig.blockScroll" [appendTo]="appConfig.appendTo"
-  [(visible)]="displayImage" #dialogImgCont>
+  [(visible)]="displayImage" #dialogImgCont style="min-width: 25vw; min-height: 10vw">
   <img src="" title="" #dialogImgSrc />
 </p-dialog>
 

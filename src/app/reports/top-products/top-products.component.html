@@ -1,0 +1,100 @@
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading"><h3 class="panel-title">{{ 'menu.reports.top_products_report' | translate }}</h3></div>
+    <div class="panel-body">
+
+        <form [formGroup]="this.topProductsForm">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <div class="radio radio-success radio-inline">
+                <input type="radio" id="typeReport" value="1" name="typeReport" checked="checked"
+                  formControlName="typeReport" (change)="this.showTable = false;" />
+                <label for="typeReport">{{ 'menu.reports.top_products_most_sales' | translate }}</label>
+              </div>
+              <div class="radio radio-warning radio-inline">
+                <input type="radio" id="typeReport" value="2" name="typeReport" checked="checked"
+                  formControlName="typeReport" (change)="this.showTable = false;" />
+                <label for="typeReport">{{ 'menu.reports.top_products_less_sales' | translate }}</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12 align-items-center">
+              <button type="button" class="btn btn-info m-r-10" (click)="this.loadData();">
+                <i class="fa fa-usd"></i>
+                {{ 'menu.reports.generate_report' | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+
+    </div><!-- panel-body -->
+  </div>
+</div>
+
+
+
+<div class="col-md-12" *ngIf="this.showTable">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{ 'categories.category_list' | translate }}</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+
+          <p-table #dataTable [value]="this.reportData" [columns]="tableColumns" [rows]="appConfig.rows"
+          [resizableColumns]="appConfig.resizableColumns" [responsive]="appConfig.responsive"
+          [rowHover]="appConfig.rowHover"  [scrollable]="appConfig.scrollable">
+
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns" pResizableColumn
+                [style.width]="col?.width" [style.text-align]="col.align ? col.align : null">
+                {{ col.header | translate }}
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-record let-columns="columns">
+            <tr>
+              <td *ngFor="let col of columns" class="ui-resizable-column ui-selectable-row" [style.width]="col?.width"
+                [style.text-align]="col.align ? col.align : null">
+
+
+                <ng-container *ngIf="col.field === 'category'">
+                  {{ record[col.field]['name'] }}
+                </ng-container>
+
+                <ng-container *ngIf="['sale_price', 'category'].includes(col.field) === false">
+                  {{ record[col.field] }}
+                </ng-container>
+
+                <ng-container *ngIf="col.field === 'sale_price'">
+                  {{ record[col.field] | currency:'BRL':'R$ ':'1.2-2' }}
+                </ng-container>
+
+              </td>
+            </tr>
+          </ng-template>
+
+
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td [attr.colspan]="columns.length">
+                {{ appConfig.emptymessage | translate }}
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

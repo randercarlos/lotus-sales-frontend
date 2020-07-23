@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     this.languages = [
       { lang: 'Português', code: 'pt' , img: 'brazil.jpg' },
       { lang: 'English', code: 'en' , img: 'us.jpg' },
-      { lang: 'Español', code: 'es' , img: 'spain.jpg' }
+      // { lang: 'Español', code: 'es' , img: 'spain.jpg' }
     ];
 
     if (this.translateService.getBrowserLang() && this.languages

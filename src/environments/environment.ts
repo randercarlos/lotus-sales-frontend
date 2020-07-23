@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // apiUrl: 'http://backend-northwind.com:8888/api/v1.0/'
-  apiUrl: 'http://localhost:3000'
+  apiUrl: 'http://localhost:3000/api'
 };
 
 /*

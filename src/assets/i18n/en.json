@@ -3,6 +3,7 @@
     "id": "ID",
     "name": "Name",
     "description": "Description",
+    "date": "Date",
     "price": "Price",
     "value": "Value",
     "image": "Image",
@@ -11,8 +12,11 @@
     "cost_price": "Cost Price",
     "sale_price": "Sale Price",
     "units_stock": "Stock",
+    "unit_price": "Unit Price",
     "actions": "Actions",
+    "status": "Status",
     "active": "Active",
+    "summary": "Summary",
     "only_active": "Active Only",
     "greather_equal_than": "greather or equal",
     "lower_equal_than": "lower or equal",
@@ -30,6 +34,7 @@
     "no": "No",
     "of": "of",
     "of2": "of",
+    "until": "until",
     "filter": "Filter",
     "clean_filter": "Clean Filters",
     "remove_upload": "Remove Upload",
@@ -87,15 +92,34 @@
     },
     "orders": {
       "itself": "Orders",
+      "order_date": "Order Date",
       "new_pendent": "News / Pending",
       "processing": "Processing",
       "sent": "Sent",
       "concluded": "Completed",
-      "canceled_reverse": "Cancels / Reversed"
+      "canceled_reverse": "Cancels / Reversed",
+      "quantity": "Qtd.",
+      "subtotal": "Subtotal",
+      "sales": "Sales",
+      "order_details": "Sales Details",
+      "order_sales_concluded": "Concluded Sales Order Listing",
+      "title_remove": "selected a record to remove.",
+      "confirm_remove_selected": "Would like to remove the selected product ?",
+      "cancel_selected": "Would like to cancel all the selected products ?",
+      "successfull_save_msg": "Sale made successfully!"
     },
     "reports": {
       "itself": "Reports",
-      "sales_category": "Sales by Category"
+      "sales_period": "Sales Period",
+      "sales_period_report": "Sales Period Report",
+      "top_products": "Top Sales",
+      "top_products_report": "Top 10 Products Most/Less Sold Report",
+      "period": "Period",
+      "revenues": "Revenues",
+      "profit": "Profit",
+      "generate_report": "Generate Report",
+      "top_products_most_sales": "Products most sold",
+      "top_products_less_sales": "Products less sold"
     },
     "access_level": {
       "itself": "Access Levels",
@@ -115,6 +139,7 @@
     "successfull_save_msg": "Category <b>{{ value }}</b> was successfully saved!"
   },
   "products": {
+    "it": "Product",
     "itself": "Products",
     "product_filters": "Products Filter",
     "product_list": "Products List",
@@ -122,6 +147,8 @@
     "product_edit": "Edit Product",
     "product_view": "View Product",
     "the_product": "The Product",
-    "successfull_save_msg": "Product <b>{{ value }}</b> was successfully saved!"
+    "successfull_save_msg": "Product <b>{{ value }}</b> was successfully saved!",
+    "successfull_add_msg": "Product <b>{{ value }}</b> was successfully added!",
+    "successfull_remove_msg": "Product <b>{{ value }}</b> was successfully remove!"
   }
 }

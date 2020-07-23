@@ -4,9 +4,9 @@ export interface Product {
   id: number;
   name: string;
   category: Category;
-  costPrice: number;
-  salePrice: number;
-  unitsStock: number;
+  cost_price: number;
+  sale_price: number;
+  units_stock: number;
   photo: string;
   active: boolean;
 }

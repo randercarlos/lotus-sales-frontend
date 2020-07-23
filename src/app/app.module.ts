@@ -1,7 +1,11 @@
+import { NgModule } from '@angular/core';
+import { ReportsModule } from './reports/reports.module';
 import { ProductsModule } from './products/products.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, Injectable } from '@angular/core';
+import { Injectable, LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -19,6 +23,10 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { CategoriesModule } from './categories/categories.module';
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from "ngx-progressbar/http";
+import { OrdersModule } from './orders/orders.module';
+
+// Register the localization
+registerLocaleData(localePt, 'pt-BR');
 
 
 // AoT requires an exported function for factories
@@ -27,21 +35,21 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 
-Sentry.init({
-  // dsn: "https://94c777b13fb140109f9d3acfd9bbc439@o404699.ingest.sentry.io/5281573",
-  integrations: [new Sentry.Integrations.TryCatch({
-    XMLHttpRequest: false,
-  })],
-});
+// Sentry.init({
+//   // dsn: "https://94c777b13fb140109f9d3acfd9bbc439@o404699.ingest.sentry.io/5281573",
+//   integrations: [new Sentry.Integrations.TryCatch({
+//     XMLHttpRequest: false,
+//   })],
+// });
 
-@Injectable()
-export class SentryErrorHandler implements ErrorHandler {
-  constructor() {}
-  handleError(error) {
-    Sentry.captureException(error.originalError || error);
-    throw error;
-  }
-}
+// @Injectable()
+// export class SentryErrorHandler implements ErrorHandler {
+//   constructor() {}
+//   handleError(error) {
+//     Sentry.captureException(error.originalError || error);
+//     throw error;
+//   }
+// }
 
 
 @NgModule({
@@ -58,6 +66,8 @@ export class SentryErrorHandler implements ErrorHandler {
     DashboardModule,
     CategoriesModule,
     ProductsModule,
+    OrdersModule,
+    ReportsModule,
     NgProgressModule.withConfig({ // enable the spinner on every request in application
       color: 'white'
     }),
@@ -71,7 +81,15 @@ export class SentryErrorHandler implements ErrorHandler {
     }),
   ],
   providers: [
-    { provide: ErrorHandler, useClass: SentryErrorHandler }, // enable error capture by Sentry
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt-BR'
+    },
+    {
+      provide: DEFAULT_CURRENCY_CODE,
+      useValue: 'BRL'
+    },
+   // { provide: ErrorHandler, useClass: SentryErrorHandler }, // enable error capture by Sentry
     {
       provide: HTTP_INTERCEPTORS,
       useClass: GlobalErrorHandlerInterceptor,  // enable GlobalErrorHandlerInterceptor

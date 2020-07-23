@@ -1,7 +1,7 @@
 import { LazyLoadEvent } from 'primeng/api';
 import { Injector } from '@angular/core';
 import { AppConfigService } from './app-config.service';
-import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { delay, tap, take, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { NotificationService } from './notification.service';
@@ -24,6 +24,7 @@ export class BaseCrudService<T> {
   loadByFilters(event?: LazyLoadEvent, filters?: object): Observable<HttpResponse<T[]>> {
     const params = this.buildQueryString(event, filters);
 
+    // return this.http.get<T[]>(this.API_URL, { params, observe: 'response' })
     return this.http.get<T[]>(this.API_URL, { params, observe: 'response' })
       .pipe(
         catchError((err: any) => {
@@ -51,34 +52,42 @@ export class BaseCrudService<T> {
     );
   }
 
-  private create(record: T): Observable<T> {
-    return this.http.post<T>(this.API_URL, record).pipe(take(1))
+  save(record): Observable<T> {
+    if (record['id']) {
+      return this.update(record);
+    }
+
+    return this.create(record);
+  }
+
+  public create(record): Observable<T> {
+    console.log('CREATE: ', record);
+    return this.http.post<T>(this.API_URL, record, {
+      headers: new HttpHeaders().set('X-Requested-With', 'XMLHttpRequest')
+    })
     .pipe(
+      tap(response => console.log(response)),
       catchError((err: any) => {
         return throwError(`Fail on create ${this.className}!`);    //Rethrow it back to component
       })
     );
   }
 
-  private update(record: T): Observable<T> {
-    return this.http.put<T>(`${this.API_URL}/${record['id']}`, record)
+  public update(record): Observable<T> {
+
+    return this.http.put<T>(`${this.API_URL}/${record['id']}`, record, {
+      headers: new HttpHeaders().set('X-Requested-With', 'XMLHttpRequest')
+    })
     .pipe(
-      take(1),
+      tap(response => console.log(response)),
       catchError((err: any) => {
         return throwError(`Fail on update ${this.className}!`);    //Rethrow it back to component
       })
     );
   }
 
-  save(record: T): Observable<T> {
-    if (record['id']) {
-      return this.update(record);
-    }
-    return this.create(record);
-  }
-
   deleteById(id): Observable<T> {
-    return this.http.delete<T>(`${this.API_URL}/${id}`).pipe(take(1))
+    return this.http.delete<T>(`${this.API_URL}/${id}`)
     .pipe(
       take(1),
       catchError((err: any) => {
@@ -109,9 +118,9 @@ export class BaseCrudService<T> {
         const value = filters[field];
 
         if (value) {
-          if (field === 'name' || field === 'description') {
-            field = field + '_like';
-          }
+          // if (field === 'name' || field === 'description') {
+          //   field = field + '_like';
+          // }
           params = params.set(field, value);
         }
       }

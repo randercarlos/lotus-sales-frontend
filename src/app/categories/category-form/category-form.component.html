@@ -27,7 +27,7 @@
                 [class.has-error]="this.validationService.hasError(this.categoryForm.get('name'))">
 
                 <label for="name" class="required control-label">{{ 'global.name' | translate }}:</label>
-                <input type="text" class="form-control" id="name" name="name" pKeyFilter="alphanum" maxlength="60"
+                <input type="text" class="form-control" id="name" name="name" maxlength="60"
                   formControlName="name" required />
 
                 <field-errors [fieldControl]="this.categoryForm.get('name')"
@@ -38,7 +38,7 @@
                 [class.has-error]="this.validationService.hasError(this.categoryForm.get('description'))">
 
                 <label for="description" class="control-label">{{ 'global.description' | translate }}:</label>
-                <input type="text" class="form-control" id="description" name="description" pKeyFilter="alphanum"
+                <input type="text" class="form-control" id="description" name="description"
                   maxlength="100" formControlName="description" />
 
                 <field-errors [fieldControl]="this.categoryForm.get('description')"
@@ -46,53 +46,6 @@
               </div>
             </div>
 
-            <div class="row">
-              <div class="form-group col-md-12">
-                <label for="name" style="display: block;">{{ 'global.image' | translate }}:</label>
-
-                <div class="fileUpload btn btn-purple {{ categoryForm.disabled
-                    ? 'disabled' : 'waves-effect waves-light' }}">
-                  <span><i class="ion-upload m-r-5"></i>{{ 'global.upload' | translate }}</span>
-                  <input type="file" class="upload" accept='image/*' formControlName="image" name="image"
-                    (change)="this.uploadService.preview(imageUpload.files)" [class.disabled]="categoryForm.disabled"
-                     #imageUpload>
-                </div>
-
-                <ng-container *ngIf="this.uploadService.getMessages().length > 0">
-                  <span class="error" *ngFor="let message of this.uploadService.getMessages()">
-                    {{ message }}
-                  </span>
-                </ng-container>
-
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="form-group col-md-12">
-
-                <!-- if upload was done, show the image -->
-                <div class="img-preview" id="img-preview" *ngIf="this.uploadService.imgURL">
-                  <img [src]="this.uploadService.imgURL" />
-                  <a href="javascript:;" (click)="this.uploadService.removeUpload()" id="removeUpload">
-                    <i class="fa fa-times"></i>
-                    {{ 'global.remove_upload' | translate }}
-                  </a>
-                </div>
-
-                <!-- if upload is save in DB, show the image without can to remove the image -->
-                <div class="img-preview" id="img-preview" *ngIf="!this.uploadService.imgURL && this.category?.image
-                  && this.category?.id">
-                  <!-- <img src="assets/images/{{ this.category.image }}" /> -->
-                  <img src="{{ this.category.image }}" />
-                  <a href="javascript:;" (click)="this.category.image = null" id="removeUpload"
-                    *ngIf="this.formMode === FORM_MODE.Edit">
-                    <i class="fa fa-times"></i>
-                    {{ 'global.remove_upload' | translate }}
-                  </a>
-                </div>
-
-              </div>
-            </div>
 
             <div class="row">
               <form-action-buttons [form]="this.categoryForm" goBackRoute="/categories"

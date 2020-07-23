@@ -3,6 +3,7 @@
     "id": "ID",
     "name": "Nome",
     "description": "Descrição",
+    "date": "Data",
     "price": "Preço",
     "value": "Valor",
     "image": "Imagem",
@@ -11,8 +12,11 @@
     "cost_price": "Preço Custo",
     "sale_price": "Preço Venda",
     "units_stock": "Estoque",
+    "unit_price": "Preço Unit.",
     "actions": "Ações",
+    "status": "Status",
     "active": "Ativo",
+    "summary": "Resumo",
     "only_active": "Somente Ativo",
     "greather_equal_than": "maior ou igual",
     "lower_equal_than": "menor ou igual",
@@ -30,6 +34,7 @@
     "no": "Não",
     "of": "de",
     "of2": "do",
+    "until": "até",
     "filter": "Filtrar",
     "clean_filter": "Limpar Filtros",
     "remove_upload": "Remover Upload",
@@ -87,15 +92,34 @@
     },
     "orders": {
       "itself": "Pedidos",
+      "order_date": "Data Ordem",
       "new_pendent": "Novos / Pendentes",
       "processing": "Processandos",
       "sent": "Enviados",
       "concluded": "Concluídos",
-      "canceled_reverse": "Cancelados / Estornados"
+      "canceled_reverse": "Cancelados / Estornados",
+      "quantity": "Qtd.",
+      "subtotal": "Subtotal",
+      "sales": "Vendas",
+      "order_details": "Detalhes da Venda",
+      "order_sales_concluded": "Listagem de Vendas Realizadas",
+      "title_remove": "selecione um registro para remover.",
+      "confirm_remove_selected": "Deseja remover o produto selecionado ?",
+      "cancel_selected": "Deseja cancelar todos os produtos selecionados ?",
+      "successfull_save_msg": "Venda realizada com sucesso!"
     },
     "reports": {
       "itself": "Relatórios",
-      "sales_category": "Vendas p/ Categoria"
+      "sales_period": "Vendas Período",
+      "sales_period_report": "Relatório de Vendas no Período",
+      "top_products": "Top Produtos",
+      "top_products_report": "Relatório de Top 10 Produtos mais/menos Mais Vendidos",
+      "period": "Período",
+      "revenues": "Faturamento",
+      "profit": "Lucro",
+      "generate_report": "Gerar Relatório",
+      "top_products_most_sales": "Produtos mais vendidos",
+      "top_products_less_sales": "Produtos menos vendidos"
     },
     "access_level": {
       "itself": "Níveis de acesso",
@@ -105,6 +129,7 @@
     }
   },
   "categories": {
+    "it": "Categoria",
     "itself": "Categorias",
     "category_filters": "Filtro de Categorias",
     "category_list": "Listagem de Categorias",
@@ -115,6 +140,7 @@
     "successfull_save_msg": "Categoria <b>{{ value }}</b> foi salva com sucesso!"
   },
   "products": {
+    "it": "Produto",
     "itself": "Produtos",
     "product_filters": "Filtro de Produtos",
     "product_list": "Listagem de Produtos",
@@ -122,6 +148,8 @@
     "product_edit": "Editar Produto",
     "product_view": "Visualizar Produto",
     "the_product": "O Produto",
-    "successfull_save_msg": "Produto <b>{{ value }}</b> foi salvo com sucesso!"
+    "successfull_save_msg": "Produto <b>{{ value }}</b> foi salvo com sucesso!",
+    "successfull_add_msg": "Produto <b>{{ value }}</b> foi adicionado com sucesso",
+    "successfull_remove_msg": "Produto <b>{{ value }}</b> foi removido com sucesso"
   }
 }

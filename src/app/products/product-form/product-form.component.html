@@ -35,10 +35,10 @@
               </div>
 
               <div class="form-group col-md-4"
-                [class.has-error]="this.validationService.hasError(this.productForm.get('category'))">
+                [class.has-error]="this.validationService.hasError(this.productForm.get('category_id'))">
 
-                <label for="category" class="required control-label">{{ 'categories.itself' | translate }}:</label>
-                <select id="category" name="category" class="form-control" formControlName="category" style="
+                <label for="category_id" class="required control-label">{{ 'categories.itself' | translate }}:</label>
+                <select id="category_id" name="category_id" class="form-control" formControlName="category_id" style="
                   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;" required>
                   <option value="" selected="selected" >Selecione uma categoria...</option>
                   <option *ngFor="let category of this.categories | async" value="{{ category.id }}">
@@ -46,9 +46,8 @@
                   </option>
                 </select>
 
-                <span class="error" *ngIf="this.productForm.get('category').errors?.required
-                  && this.productForm.get('category').touched"
-                  translate [translateParams]="{value: 'Nome' }">
+                <span class="error" *ngIf="this.productForm.get('category_id').errors?.required
+                  && this.productForm.get('category_id').touched" translate [translateParams]="{value: 'Nome' }">
                   global.required
                 </span>
               </div>
@@ -56,43 +55,43 @@
 
             <div class="row">
               <div class="form-group col-md-4"
-                [class.has-error]="this.validationService.hasError(this.productForm.get('costPrice'))">
+                [class.has-error]="this.validationService.hasError(this.productForm.get('cost_price'))">
 
-                <label for="category" class="required control-label">{{ 'global.cost_price' | translate }}:</label>
-                <input type="text" class="form-control" id="costPrice" name="costPrice" maxlength="9"
-                formControlName="costPrice" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', allowNegative: false }" />
+                <label for="cost_price" class="required control-label">{{ 'global.cost_price' | translate }}:</label>
+                <input type="text" class="form-control" id="cost_price" name="cost_price" maxlength="9"
+                formControlName="cost_price" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', allowNegative: false }" />
 
-                <field-errors [fieldControl]="this.productForm.get('costPrice')"
+                <field-errors [fieldControl]="this.productForm.get('cost_price')"
                   [transValue]="{name: 'Preço Custo'}"></field-errors>
               </div>
 
               <div class="form-group col-md-4"
-                [class.has-error]="this.validationService.hasError(this.productForm.get('salePrice'))">
+                [class.has-error]="this.validationService.hasError(this.productForm.get('sale_price'))">
 
-                <label for="category" class="required control-label">{{ 'global.sale_price' | translate }}:</label>
-                <input type="text" class="form-control" id="salePrice" name="salePrice" maxlength="9"
-                  formControlName="salePrice" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', allowNegative: false }" />
+                <label for="sale_price" class="required control-label">{{ 'global.sale_price' | translate }}:</label>
+                <input type="text" class="form-control" id="sale_price" name="sale_price" maxlength="9"
+                  formControlName="sale_price" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', allowNegative: false }" />
 
-                <field-errors [fieldControl]="this.productForm.get('costPrice')"
+                <field-errors [fieldControl]="this.productForm.get('sale_price')"
                   [transValue]="{name: 'Preço Venda'}"></field-errors>
               </div>
 
               <div class="form-group col-md-4"
-                [class.has-error]="this.validationService.hasError(this.productForm.get('unitsStock'))">
+                [class.has-error]="this.validationService.hasError(this.productForm.get('units_stock'))">
 
-                <label for="category" class="required control-label">{{ 'global.units_stock' | translate }}:</label>
-                <input type="text" class="form-control" id="unitsStock" name="unitsStock"  currencyMask
-                  maxlength="4" formControlName="unitsStock" [options]="{ prefix: '', precision: 0,
+                <label for="units_stock" class="required control-label">{{ 'global.units_stock' | translate }}:</label>
+                <input type="text" class="form-control" id="units_stock" name="units_stock"  currencyMask
+                  maxlength="4" formControlName="units_stock" [options]="{ prefix: '', precision: 0,
                   allowNegative: false, decimal:'', thousands:'' }" />
 
-                <field-errors [fieldControl]="this.productForm.get('unitsStock')"
+                <field-errors [fieldControl]="this.productForm.get('units_stock')"
                   [transValue]="{name: 'Estoque'}"></field-errors>
               </div>
             </div>
 
             <div class="row">
               <div class="form-group col-md-12">
-                <label for="name" style="display: block;">{{ 'global.image' | translate }}:</label>
+                <label for="photo" style="display: block;">{{ 'global.image' | translate }}:</label>
 
                 <div class="fileUpload btn btn-purple {{ productForm.disabled
                     ? 'disabled' : 'waves-effect waves-light' }}">
@@ -126,7 +125,10 @@
                 <!-- if upload is save in DB, show the image without can to remove the image -->
                 <div class="img-preview" id="img-preview" *ngIf="!this.uploadService.imgURL && this.product?.photo
                   && this.product?.id">
-                  <img src="assets/images/{{ this.product.photo }}" />
+
+                  <img [src]="this.product.photo" alt="{{this.product.name}}" title="{{this.product.name}}"
+                  style="width: 80px; height: 80px; margin-bottom: 10px;"/>
+
                   <a href="javascript:;" (click)="this.product.photo = null" id="removeUpload"
                     *ngIf="this.formMode === FORM_MODE.Edit">
                     <i class="fa fa-times"></i>
@@ -153,8 +155,8 @@
             </div>
           </form>
 
-          FORM VALID: {{ this.productForm.valid }} <br />
-          FORM ERRORS: {{ this.validationService.getAllFormErrors(this.productForm) | json }}
+          <!-- FORM VALID: {{ this.productForm.valid }} <br />
+          FORM ERRORS: {{ this.validationService.getAllFormErrors(this.productForm) | json }} -->
       </div><!-- panel-body -->
     </div>
   </div>
@@ -162,3 +164,4 @@
 </div>
 
 
+<!-- <img [src]="record[col.field]" alt="{{record.name}}" title="{{record.name}}" style="width: 80px; height: 80px"/> -->
